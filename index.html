@@ -6,52 +6,41 @@
   <title>Brisas de Gloria</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      font-family: 'Georgia', serif;
       overflow: hidden;
     }
-
     .portada-container {
       position: relative;
       width: 100vw;
       height: 100vh;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
-
     .portada-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
       transition: transform 0.4s ease, filter 0.4s ease;
     }
-
     .portada-container:hover .portada-img {
       transform: scale(1.03);
       filter: brightness(1.1);
     }
-
     .overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.15) 0%,
-        rgba(0,0,0,0.05) 40%,
-        rgba(0,0,0,0.55) 100%
+        rgba(0,0,0,0.0) 0%,
+        rgba(0,0,0,0.0) 50%,
+        rgba(0,0,0,0.5) 100%
       );
       pointer-events: none;
     }
-
     .texto-inferior {
       position: absolute;
       bottom: 60px;
@@ -60,50 +49,23 @@
       text-align: center;
       pointer-events: none;
     }
-
-    .titulo {
-      font-size: clamp(28px, 6vw, 58px);
-      color: #FFD700;
-      text-shadow:
-        0 0 20px rgba(255, 215, 0, 0.8),
-        2px 2px 6px rgba(0,0,0,0.9);
-      letter-spacing: 4px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .subtitulo {
-      font-size: clamp(13px, 2.5vw, 20px);
-      color: #ffffff;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
-      letter-spacing: 2px;
-      margin-bottom: 28px;
-      opacity: 0.9;
-    }
-
     .btn-jugar {
       display: inline-block;
       background: linear-gradient(135deg, #FFD700, #B8860B);
       color: #000;
-      font-size: clamp(14px, 2.5vw, 20px);
+      font-size: clamp(16px, 2.5vw, 22px);
       font-weight: bold;
-      padding: 14px 48px;
+      padding: 16px 56px;
       border-radius: 50px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      box-shadow:
-        0 0 30px rgba(255, 215, 0, 0.6),
-        0 4px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 4px 15px rgba(0,0,0,0.5);
       animation: pulsar 2s infinite ease-in-out;
-      pointer-events: none;
     }
-
     @keyframes pulsar {
       0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 4px 15px rgba(0,0,0,0.5); }
       50% { transform: scale(1.06); box-shadow: 0 0 50px rgba(255,215,0,0.9), 0 4px 20px rgba(0,0,0,0.5); }
     }
-
     .estrella {
       position: absolute;
       color: #FFD700;
@@ -112,42 +74,33 @@
       animation: flotar 4s infinite ease-in-out;
       pointer-events: none;
     }
-
     @keyframes flotar {
       0%   { opacity: 0; transform: translateY(0) scale(0.5); }
       30%  { opacity: 0.8; }
       70%  { opacity: 0.6; }
       100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
     }
-
     .fade-out {
       animation: fadeOut 0.6s ease forwards;
     }
-
     @keyframes fadeOut {
       to { opacity: 0; }
     }
   </style>
 </head>
 <body>
-
   <div class="portada-container" id="portada" onclick="irAlJuego()">
     <img class="portada-img" src="assets/PORTADA.jpeg" alt="Brisas de Gloria">
     <div class="overlay"></div>
-
     <div class="texto-inferior">
-      <div class="titulo">Brisas de Gloria</div>
-      <div class="subtitulo">🐎 &nbsp; El juego de carreras de caballos &nbsp; 🐎</div>
       <div class="btn-jugar">▶ &nbsp; Jugar ahora</div>
     </div>
-
     <span class="estrella" style="left:10%; top:70%; animation-delay:0s;">✦</span>
     <span class="estrella" style="left:85%; top:65%; animation-delay:1.2s;">✦</span>
     <span class="estrella" style="left:50%; top:75%; animation-delay:2.4s;">✦</span>
     <span class="estrella" style="left:25%; top:60%; animation-delay:0.8s;">✦</span>
     <span class="estrella" style="left:70%; top:72%; animation-delay:1.8s;">✦</span>
   </div>
-
   <script>
     function irAlJuego() {
       document.getElementById('portada').classList.add('fade-out');
@@ -156,6 +109,5 @@
       }, 600);
     }
   </script>
-
 </body>
 </html>
