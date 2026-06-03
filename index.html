@@ -3,111 +3,97 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brisas de Gloria</title>
+  <title>Brisas de Gloria — Tu Universo Hípico Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --oro: #FFD700;
+      --oro-oscuro: #B8860B;
+      --rojo: #8B0000;
+      --crema: #F5E6C8;
+      --negro: #050505;
+      --gris-oscuro: #111111;
+      --azul-deep: #0a0f1e;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-    .portada-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      cursor: pointer;
-    }
-    .portada-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease, filter 0.4s ease;
-    }
-    .portada-container:hover .portada-img {
-      transform: scale(1.03);
-      filter: brightness(1.1);
-    }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.0) 0%,
-        rgba(0,0,0,0.0) 50%,
-        rgba(0,0,0,0.5) 100%
-      );
-      pointer-events: none;
-    }
-    .texto-inferior {
-      position: absolute;
-      bottom: 60px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      pointer-events: none;
-    }
-    .btn-jugar {
-      display: inline-block;
-      background: linear-gradient(135deg, #FFD700, #B8860B);
-      color: #000;
-      font-size: clamp(16px, 2.5vw, 22px);
-      font-weight: bold;
-      padding: 16px 56px;
-      border-radius: 50px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 4px 15px rgba(0,0,0,0.5);
-      animation: pulsar 2s infinite ease-in-out;
-    }
-    @keyframes pulsar {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 4px 15px rgba(0,0,0,0.5); }
-      50% { transform: scale(1.06); box-shadow: 0 0 50px rgba(255,215,0,0.9), 0 4px 20px rgba(0,0,0,0.5); }
-    }
-    .estrella {
-      position: absolute;
-      color: #FFD700;
-      font-size: 18px;
-      opacity: 0;
-      animation: flotar 4s infinite ease-in-out;
-      pointer-events: none;
-    }
-    @keyframes flotar {
-      0%   { opacity: 0; transform: translateY(0) scale(0.5); }
-      30%  { opacity: 0.8; }
-      70%  { opacity: 0.6; }
-      100% { opacity: 0; transform: translateY(-80px) scale(1.2); }
-    }
-    .fade-out {
-      animation: fadeOut 0.6s ease forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; }
-    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--negro); color: var(--crema); font-family: 'Raleway', sans-serif; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 16px 40px; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); }
+    .nav-logo img { height: 48px; filter: drop-shadow(0 0 8px rgba(255,215,0,0.5)); border-radius: 50%; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--crema); text-decoration: none; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--oro); }
+    #portada { position: relative; width: 100vw; height: 100vh; cursor: pointer; overflow: hidden; }
+    #portada img.bg { width: 100%; height: 100%; object-fit: cover; animation: kenburns 12s ease infinite alternate; }
+    @keyframes kenburns { 0% { transform: scale(1.0); } 100% { transform: scale(1.08); } }
+    .portada-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.6) 100%); }
+    .portada-contenido { position: absolute; bottom: 80px; left: 0; right: 0; text-align: center; }
+    .btn-jugar { display: inline-block; background: linear-gradient(135deg, var(--oro), var(--oro-oscuro)); color: #000; font-family: 'Cinzel', serif; font-size: clamp(14px, 2vw, 20px); font-weight: 700; padding: 18px 60px; border-radius: 50px; letter-spacing: 4px; text-transform: uppercase; box-shadow: 0 0 40px rgba(255,215,0,0.5); animation: pulsar 2s infinite ease-in-out; border: none; cursor: pointer; }
+    @keyframes pulsar { 0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255,215,0,0.5); } 50% { transform: scale(1.05); box-shadow: 0 0 70px rgba(255,215,0,0.9); } }
+    .scroll-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 3px; animation: bounce 2s infinite; }
+    .scroll-hint::after { content: '▼'; display: block; text-align: center; margin-top: 4px; }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    .estrella { position: absolute; color: var(--oro); font-size: 16px; opacity: 0; animation: flotar 4s infinite ease-in-out; pointer-events: none; }
+    @keyframes flotar { 0% { opacity: 0; transform: translateY(0) scale(0.5); } 30% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-80px) scale(1.2); } }
+    .fade-out { animation: fadeOut 0.6s ease forwards; }
+    @keyframes fadeOut { to { opacity: 0; } }
+    .divisor { width: 100%; height: 4px; background: linear-gradient(to right, transparent, var(--oro), transparent); opacity: 0.5; }
+    #gloria { background: linear-gradient(135deg, #0a0f1e 0%, #1a0505 50%, #0a0f1e 100%); padding: 100px 40px; display: flex; align-items: center; justify-content: center; gap: 80px; flex-wrap: wrap; }
+    .gloria-imagen { position: relative; flex: 0 0 auto; }
+    .gloria-imagen img { width: 320px; border-radius: 16px; border: 2px solid rgba(255,215,0,0.3); box-shadow: 0 0 60px rgba(255,215,0,0.2), 0 0 120px rgba(139,0,0,0.3); animation: gloriaFloat 4s ease-in-out infinite; }
+    @keyframes gloriaFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .gloria-badge { position: absolute; top: 16px; right: -16px; background: linear-gradient(135deg, var(--oro), var(--oro-oscuro)); color: #000; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700; padding: 6px 14px; border-radius: 20px; letter-spacing: 2px; text-transform: uppercase; }
+    .gloria-texto { max-width: 520px; }
+    .seccion-etiqueta { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; color: var(--oro); text-transform: uppercase; margin-bottom: 16px; opacity: 0.8; }
+    .seccion-titulo { font-family: 'Cinzel Decorative', serif; font-size: clamp(28px, 4vw, 48px); color: var(--crema); line-height: 1.2; margin-bottom: 24px; text-shadow: 0 0 30px rgba(255,215,0,0.3); }
+    .seccion-titulo span { color: var(--oro); }
+    .seccion-texto { font-size: 16px; line-height: 1.8; color: rgba(245,230,200,0.8); margin-bottom: 32px; }
+    .btn-secundario { display: inline-block; border: 1px solid var(--oro); color: var(--oro); font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px; padding: 14px 36px; border-radius: 4px; text-decoration: none; text-transform: uppercase; transition: all 0.3s; }
+    .btn-secundario:hover { background: var(--oro); color: #000; }
+    #juegos { background: var(--gris-oscuro); padding: 100px 40px; }
+    .seccion-header { text-align: center; margin-bottom: 64px; }
+    .juegos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto; }
+    .juego-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid rgba(255,215,0,0.1); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; background: #0a0a0a; }
+    .juego-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(255,215,0,0.2); border-color: rgba(255,215,0,0.4); }
+    .juego-card img { width: 100%; height: 280px; object-fit: cover; transition: transform 0.4s; filter: brightness(0.85); }
+    .juego-card:hover img { transform: scale(1.05); filter: brightness(1); }
+    .juego-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%); }
+    .juego-card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; }
+    .juego-tag { font-size: 10px; letter-spacing: 3px; color: var(--oro); text-transform: uppercase; margin-bottom: 6px; font-family: 'Cinzel', serif; }
+    .juego-nombre { font-family: 'Cinzel Decorative', serif; font-size: 18px; color: white; margin-bottom: 8px; }
+    .juego-desc { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .juego-pronto { position: absolute; top: 16px; right: 16px; background: rgba(139,0,0,0.8); border: 1px solid rgba(255,215,0,0.4); color: var(--oro); font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; padding: 5px 12px; border-radius: 20px; text-transform: uppercase; }
+    #token { background: linear-gradient(135deg, #0a0f1e, #1a0a00, #0a0f1e); padding: 100px 40px; text-align: center; position: relative; overflow: hidden; }
+    #token::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,215,0,0.05) 0%, transparent 70%); }
+    .token-contenido { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .token-logo { width: 200px; border-radius: 50%; margin: 0 auto 40px; display: block; animation: rotar 20s linear infinite; filter: drop-shadow(0 0 30px rgba(255,215,0,0.4)); }
+    @keyframes rotar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .token-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 48px; }
+    .token-stat { text-align: center; }
+    .token-stat-num { font-family: 'Cinzel Decorative', serif; font-size: 36px; color: var(--oro); display: block; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+    .token-stat-label { font-size: 12px; letter-spacing: 2px; color: rgba(245,230,200,0.6); text-transform: uppercase; margin-top: 4px; }
+    footer { background: #000; padding: 60px 40px 40px; text-align: center; border-top: 1px solid rgba(255,215,0,0.1); }
+    .footer-logo img { height: 80px; margin-bottom: 24px; filter: drop-shadow(0 0 12px rgba(255,215,0,0.3)); border-radius: 50%; }
+    .footer-texto { font-size: 13px; color: rgba(245,230,200,0.4); letter-spacing: 2px; margin-bottom: 8px; }
+    .footer-marca { font-family: 'Cinzel', serif; font-size: 11px; color: var(--oro); letter-spacing: 4px; opacity: 0.6; text-transform: uppercase; }
   </style>
 </head>
 <body>
-  <div class="portada-container" id="portada" onclick="irAlJuego()">
-    <img class="portada-img" src="assets/PORTADA.jpeg" alt="Brisas de Gloria">
-    <div class="overlay"></div>
-    <div class="texto-inferior">
-      <div class="btn-jugar">▶ &nbsp; Jugar ahora</div>
+  <nav>
+    <div class="nav-logo"><img src="assets/LOGO_BDG.jpeg" alt="BDG"></div>
+    <ul class="nav-links">
+      <li><a href="#portada">Inicio</a></li>
+      <li><a href="#gloria">Gloria</a></li>
+      <li><a href="#juegos">Juegos</a></li>
+      <li><a href="#token">Token BDG</a></li>
+    </ul>
+  </nav>
+
+  <section id="portada" onclick="irAlJuego()">
+    <img class="bg" src="assets/PORTADA.jpeg" alt="Brisas de Gloria">
+    <div class="portada-overlay"></div>
+    <div class="portada-contenido">
+      <button class="btn-jugar">▶ &nbsp; Jugar Ahora</button>
     </div>
-    <span class="estrella" style="left:10%; top:70%; animation-delay:0s;">✦</span>
-    <span class="estrella" style="left:85%; top:65%; animation-delay:1.2s;">✦</span>
-    <span class="estrella" style="left:50%; top:75%; animation-delay:2.4s;">✦</span>
-    <span class="estrella" style="left:25%; top:60%; animation-delay:0.8s;">✦</span>
-    <span class="estrella" style="left:70%; top:72%; animation-delay:1.8s;">✦</span>
-  </div>
-  <script>
-    function irAlJuego() {
-      document.getElementById('portada').classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = 'juego.html';
-      }, 600);
-    }
-  </script>
-</body>
-</html>
+    <div class="scroll-hint">DESCUBRE EL UNIVERSO</div>
+    <span class="estrella
